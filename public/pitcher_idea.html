@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitcher_idea</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    
+    <link rel="icon" href="pics/fav1.png">
+
+    <script src="js/jquery-1.8.2.min.js"></script>
+
+    
+<script>
+    $(document).ready(function(){
+
+      $("#txtemail").val(localStorage.getItem("activeuser"));
+
+   });
+
+  </script>
+
+<style>
+  .btn{
+      box-shadow: 5px 5px 5px 0px blanchedalmond;
+  }
+  .btn:hover{
+background-color:rgb(60, 250, 76);
+color: black;
+}
+</style>
+
+
+</head>
+<body class="bg-dark bg-gradient ">
+
+    <nav class="navbar" style="background-color:rgb(2, 2, 62) ;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="pics/animals.png" alt=""   >
+          </a>
+          <span style="align-items:center;color:yellowgreen; font-weight: bold;"><h3 >PITCHER IDEA</h3></span>
+        </div>
+      </nav>
+
+      <div class="container " >
+        <div  class="row" >
+            <div class="col-md-12 text-center text-black">
+                <h2 ></h2>
+            </div>
+        </div>
+
+      <form class="row g-3" method="post" enctype="multipart/form-data">
+        <div class="col-md-7" style="margin-top:30px ;">
+          <label for="txtemail" class="form-label text-light ">Email</label>
+          <input type="email" class="form-control border border-4" id="txtemail" name="email">
+        </div>
+        <!-- <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPassword4">
+        </div> -->
+
+
+        <div class="col-md-6">
+          <label for="txtcat" class="form-label  text-light ">Category</label>
+          <select class="form-select   border border-4" aria-label="Default select example" name="category">
+            <option selected>Open this select menu</option>
+            <option value="social">Social</option>
+            <option value="tech">Technical</option>
+            <option value="food">Food</option>
+            <option value="cloths">Cloths</option>
+            <option value="beverages">Beverages</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="txtidea" class="form-label text-light ">Idea-title</label>
+          <input type="text" class="form-control  border border-4" id="txtidea" name="ideatitle" >
+        </div>
+
+
+        <div class="col-md-10">
+          <label for="txtworking" class="form-label text-light "> Working (how it helps people)</label>
+          <textarea class="form-control  border border-4" name="working"> </textarea>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <label for="txtincome" class="form-label text-light "> Present Income</label>
+            <input type="text" class="form-control  border border-4" id="txtincome" name="presentincome">
+        </div>
+        <div class="col-md-3 ms-5" >
+            <label for="txtfund" class="form-label text-light " >Already fund raised</label><br>
+            <div class="form-check form-check-inline" >
+                <input class="form-check-input  border border-4" type="radio" name="fund" id="txtfundyes" value="yes">
+                <label class="form-check-label text-light " for="txtfundyes">yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input border border-4" type="radio" name="fund" id="txtfundno" value="no">
+                <label class="form-check-label text-light " for="txtfundno">no</label>
+              </div>
+        </div>
+        <div class="col-md-3">
+          <label for="txtyear" class="form-label text-light">Started in Year</label>
+          <select class="form-select  border border-4" aria-label="Default select example" name="year">
+            <option selected>Select </option>
+            <option value="2010">&#60;&#x3D;2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+
+          </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="txtinvestment" class="form-label  text-light ">Investment Required</label>
+            <input type="text" class="form-control  border border-4" id="txtinvestment" name="investmentrequired" >
+          </div>
+          <div class="col-md-3" style="margin-left:40px ;">
+            <label for="txtshare" class="form-label text-light ">No. of partners / Share holders</label>
+            <select class="form-select  border border-4" aria-label="Default select example" name="shareholder">
+                <option selected> Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+          </div>
+
+          <div class="input-group">
+            <span class="input-group-text ">Other info</span>
+            <textarea class="form-control  border border-4" aria-label="With textarea" style="height:100px;" name="info"></textarea>
+        </div>
+
+        <div class="d-grid gap-2 col-3 mx-auto mb-5">
+            <button class="btn btn-outline-success fw-bolder" id="btnsave"  formaction="/saveidea" type="submit">Save</button>
+          </div>
+
+
+
+
+
+        <!-- <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div> -->
+        <!-- <div class="col-12">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div> -->
+      </form>
+    
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+
+<link rel="icon" href="pics/fav1.png">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script src="js/jquery-1.8.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+      // LOGIN ENTRY WITH RESPECTIVE PAGE LINKING.....................
+
+      $("#btnlogin").click(function () {
+        var email = $("#txtel").val();
+        var password = $("#txtpl").val();
+
+        var url = "/ajaxlogin?emailid=" + email + "&pwd=" + password;
+
+        $.getJSON(url, function (respJson) 
+        {
+          alert(JSON.stringify(respJson));
+          if (respJson.length==1)
+           {
+                if (respJson[0].type== "invester") {
+                 alert(respJson[0].type);
+                 location.href = "dash_invester.html";
+            }
+            else {
+              location.href = "dash_pitcher.html";
+            }
+          }
+
+          else
+            alert("Invalid uid/password");
+        })
+      });
+
+
+// LOGINBUTTON ........................
+      var i = 0;
+      $("#btnsignup").click(function () {
+
+        var email = $("#txtes").val();
+        var password = $("#txtps").val();
+        var type = $("#txttype").val();
+        var url = "/ajaxemail?emailid=" + email + "&pwd=" + password + "&type=" + type;
+
+        $.get(url, function (resp) {
+          alert(resp);
+        })
+      });
+    });
+  </script>
+
+
+</head>
+<body>
+
+    <nav class="navbar  fixed-top navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/public/pics/animals.png" alt="">
+              </a>
+          <a class="navbar-brand" href="#">WELCOME </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Meet the developers</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Our services
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Post your idea</a></li>
+                  <li><a class="dropdown-item" href="#">Find pitcher</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Innovations </a></li>
+                  <li><a class="dropdown-item" href="#">Get Investor</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link ">Reach us</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal"
+          data-bs-target="#signupModal">Sign-up</button>
+        <button class="btn btn-m btn-outline-success" type="button" data-bs-toggle="modal"
+          data-bs-target="#loginModal">Login</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      
+    <!-- SIGNUPMODAL-------------------- -->
+
+    <div class="modal" tabindex="-1" id="signupModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">SIGN-UP with us </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+  
+              <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" id="txtes" name="txtes" aria-describedby="emailHelp">
+  
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="txtps" name="txtps">
+              </div>
+              <div class="mb-3">
+                <select class="form-select" aria-label="Default select example" id="txttype">
+                  <option> Select menu</option>
+                  <option value="pitcher">Pitcher</option>
+                  <option value="invester">Invester</option>
+  
+                </select>
+              </div>
+              <center>
+                <button type="button" class="btn btn-primary" id="btnsignup" >Signup</button>
+              </center>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+  
+  
+  
+      <!-- LOGINMODAL-------------------- -->
+  
+      <div class="modal" tabindex="-1" id="loginModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">LOG-IN now</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" id="txtel" name="txtel" aria-describedby="emailHelp">
+  
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="txtpl" name="txtpl">
+              </div>
+              <center>
+                <button type="button" class="btn btn-primary" id="btnlogin">Login</button>
+              </center>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shark Tank</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    .btn {
+      box-shadow: 2px 2px 2px 1px #BB86FC;
+    }
+
+
+    .flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 5px 5px 15px 0 rgba(242, 244, 218, 0.753);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  color: white;
+  transform: rotateY(180deg);
+}
+.purple{
+  color: #BB86FC;
+}
+ 
+.bg-purple{
+  background-color: #BB86FC;
+}
+.btn2
+{
+    display: block;
+    /* margin: 35px auto; */
+    /* width: fit-content; */
+    background-color: #12121200;
+    border: 1px solid #BB86FC;
+    /* padding: 14px 50px; */
+    border-radius: 6px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: 0.3s;
+}
+
+.btn2:hover
+{
+    background-color: #dec4ff14;
+    cursor: pointer;
+}
+
+
+
+
+
+  </style>
+
+
+
+  <link rel="icon" href="pics/fav1.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <script src="js/jquery-1.8.2.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      // LOGIN ENTRY WITH RESPECTIVE PAGE LINKING.....................
+
+      $("#btnlogin").click(function () {
+        var email = $("#txtel").val();
+        var password = $("#txtpl").val();
+
+        var url = "/ajaxlogin?emailid=" + email + "&pwd=" + password;
+
+        $.getJSON(url, function (respJson) {
+          alert(JSON.stringify(respJson));
+          if (respJson.length == 1) {
+            localStorage.setItem("activeuser",email);
+            if (respJson[0].type == "invester") {
+              alert(respJson[0].type);
+              location.href = "dash_invester.html";
+            }
+            else {
+              location.href = "dash_pitcher.html";
+            }
+          }
+
+          else
+            alert("Invalid uid/password");
+        })
+      });
+
+
+      // SIGNUP ........................
+      var i = 0;
+      $("#btnsignup").click(function () {
+
+        var email = $("#txtes").val();
+        var password = $("#txtps").val();
+        var type = $("#txttype").val();
+        var url = "/ajaxemail?emailid=" + email + "&pwd=" + password + "&type=" + type;
+
+        $.get(url, function (resp) {
+          alert(resp);
+        })
+      });
+    });
+  </script>
+
+
+</head>
+
+<body style="background-color:black ;font-family: Times, Times New Roman, Georgia, serif;" class=" bg-gradient  ">
+
+  <div class="container-fluid" style="background-color: black;" data-aos="fade-down" id="home">
+    <nav class="navbar   navbar-expand-lg  ">
+      <div class="container-fluid  ">
+        <a class="navbar-brand" href="#">
+          <img src="/pics/animals.png" alt="">
+        </a>
+        <a class="navbar-brand" href="#" style="color:#BB86FC ;">SHARK TANK</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Times, Times New Roman, Georgia, serif">
+            <li class="nav-item">
+              <a class="nav-link active ms-5" aria-current="page" href="#home" style="color:rgb(180, 210, 226) ;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#meet" style="color:rgb(180, 210, 226) ;">Meet the developers</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#services" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                style="color:rgb(180, 210, 226) ;">
+                Our services
+              </a>
+              <ul class="dropdown-menu" style="color:rgb(180, 210, 226) ;">
+                <li><a class="dropdown-item" href="#idea">Post your idea</a></li>
+                <li><a class="dropdown-item" href="#find">Find pitcher</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#innovations">Innovations </a></li>
+                <li><a class="dropdown-item" href="#invester">Get Investor</a></li>
+
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#reach" style="color:rgb(180, 210, 226) ;">Reach us</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <button class="btn btn2 me-2" type="button" data-bs-toggle="modal"
+              data-bs-target="#signupModal">Sign-up</button>
+            <button class="btn btn-m btn2" type="button" data-bs-toggle="modal"
+              data-bs-target="#loginModal">Login</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- SIGNUPMODAL-------------------- -->
+
+  <div class="modal " tabindex="-1" id="signupModal">
+    <div class="modal-dialog ">
+      <div class="modal-content bg-purple bg-opacity-75  border border-2">
+        <div class="modal-header ">
+          <h5 class="modal-title text-dark fw-bolder ">SIGN-UP with us </h5>
+          <button type="button" class="btn-close border border-danger " data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Email address</label>
+            <input type="email" class="form-control border border-4" id="txtes" name="txtes" aria-describedby="emailHelp">
+
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Password</label>
+            <input type="password" class="form-control border border-4" id="txtps" name="txtps">
+          </div>
+          <div class="mb-3">
+            <select class="form-select fw-bold mt-4 border border-4" aria-label="Default select example" id="txttype">
+              <option> Select </option>
+              <option value="pitcher">Pitcher</option>
+              <option value="invester">Invester</option>
+
+            </select>
+          </div>
+          <center>
+            <button type="button" class="btn btn-outline-dark  fw-bold" id="btnsignup">Signup</button>
+          </center>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- LOGINMODAL-------------------- -->
+
+  <div class="modal" tabindex="-1" id="loginModal">
+    <div class="modal-dialog">
+      <div class="modal-content bg-purple bg-opacity-75 border border-2">
+        <div class="modal-header">
+          <h5 class="modal-title text-dark fw-bolder">LOG-IN now</h5>
+          <button type="button" class="btn-close border border-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Email address</label>
+            <input type="email" class="form-control  border border-4" id="txtel" name="txtel" aria-describedby="emailHelp">
+
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Password</label>
+            <input type="password" class="form-control border border-4" id="txtpl" name="txtpl">
+          </div>
+          <center>
+            <button type="button" class="btn btn-outline-dark  fw-bold" id="btnlogin">Login</button>
+          </center>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ______________________________________________CROUSEL__________________________________________ -->
+
+
+  <div id="carouselExampleInterval" class="  mt-3  carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner  ">
+      <div class="carousel-item active " data-bs-interval="1000">
+        <img src="/pics/crousel1.jpg" class="d-block w-100 " alt="...">
+      </div>
+      <div class="carousel-item " data-bs-interval="2000">
+        <img src="/pics/crouse;2.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item ">
+        <img src="/pics/st1.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+  <!-- _________________________________________SERVICES_______________________________________________ -->
+
+
+  <div class="container-fluid bg-black mt-5   bg-gradient " data-aos="fade-down" id="services">
+    <h1 class=" container display-5 text-light">OUR</h1>
+    <h1 class=" container display-4 purple">SERVICES</h1>
+
+    <div class="card-group mb-5  " >
+      <div class="card ms-3 border-0  " style="background-color:inherit ;" data-aos="zoom-in" id="idea">
+        <img src="/pics/indexideaa.jpg" class="card-img-top" alt="..." height="370">
+        <div class="card-body">
+          <h5 class="card-title text-center text-bg-danger">Post Idea</h5>
+          <p class="card-text text-light">"I got lucky because I never gave up the search. Are you quitting too soon?
+            Or, are you
+            willing to pursue luck with a vengeance?"....</p>
+        </div>
+      </div>
+      <div class="card ms-3 border-0 " style="background-color:inherit ;" data-aos="zoom-in" id="invester">
+        <img src="/pics/indexinvestor.jpg" class="card-img-top" alt="..." height="370">
+        <div class="card-body ">
+          <h5 class="card-title text-center text-bg-danger">Get Investor</h5>
+          <p class="card-text text-light">information about a person's life, work, interests, etc. on a social
+            networking website.....</p>
+        </div>
+      </div>
+      <div class="card ms-3 border-0 " style="background-color:inherit ;" data-aos="zoom-in" id="innovations">
+        <img src="/pics/indexinnovations.jpg" class="card-img-top" alt="..." height="370">
+        <div class="card-body">
+          <h5 class="card-title text-center text-bg-danger">Innovations</h5>
+          <p class="card-text text-light">“Innovation is the unrelenting drive to break the status quo and develop anew
+            where few have dared to go.</p>
+        </div>
+      </div>
+      <div class="card ms-3 border-0" style="background-color:inherit ;" data-aos="zoom-in" id="find">
+        <img src="/pics/indexfind2.png" class="card-img-top" alt="..." height="370">
+        <div class="card-body">
+          <h5 class="card-title text-center text-bg-danger">Find Pitcher</h5>
+          <p class="card-text text-light">The pitch deck should include details of who the people behind your business
+            are, the problem you are trying to solve, your product or service which acts as the solution to that
+            problem...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- _______________________________________MEET DEVELOPERS_______________________________________ -->
+
+  <div class="container-fluid bg-black mt-5   bg-gradient " data-aos="fade-down" id="meet">
+    <h1 class=" container display-5 text-light"> MEET OUR</h1>
+    <h1 class=" container display-4 purple">DEVELOPER</h1>
+
+
+    <!-- <div class="row row-cols-1 row-cols-md-2 mt-5 ">
+
+      <div class="card mb-3 ms-5 " style="max-width: 540px; background-color:inherit ;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/pics/me.jpeg" class="img-fluid rounded-start " alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body text-center ">
+              <h5 class="card-title text-success ">KASHISH SHARMA </h5>
+              <p class="card-text text-light">This is a wider card with supporting text below as a natural lead-in to
+                additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 ms-5  " style="max-width: 540px;background-color:inherit ;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/pics/sir.jpg" class=" img-fluid rounded-start" alt="..." >
+          </div>
+          <div class="col-md-8">
+            <div class="card-body text-center">
+              <h5 class="card-title text-success">RAJESH BANSEL</h5>
+              <p class="card-text text-light">20 Years experience in Training & Development. Founder of realJavaOnline.com, loves coding in Java(J2SE, J2EE), C++,PHP, Python, AngularJS, Android,MERN Stack(MongoDB,Express,ReactJS,NodeJS). If you like tutorials and want to know more in depth about Java , buy his book "Real Java" available on amazon.in.
+                #Email : bcebti@gmail.com #Contact : 98722-46056.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+<center>
+    <div class="row">
+      <div class="col-lg-6 mb-6">
+        <div class="flip-card  mt-5 mb-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" >
+              <img src="pics/resume 2.jpeg" alt="Avatar" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back bg-success bg-opacity-10 border border-5">
+              <h3 style="color:black">Developed By</h3> 
+              <p><h2 style="color:rgb(100, 212, 100) ; font-family: fantasy;">Satyam Chhabra</h2></p> 
+              <p >You may be pitching in a more formal capacity, where you deliver a full presentation, or you may be pitching a simple idea about how to improve processes to a colleague in an informal setting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-lg-6 mb-6" >
+        <div class="flip-card mt-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="/pics/sir.jpg" alt="Avatar" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back bg-success bg-opacity-10 border border-5">
+              <h3 style="color:black">Under the guidance of</h3> 
+              <p><h2 style="color:rgb(100, 212, 100) ; font-family: fantasy;">Mr.Rajesh Bansal</h2></p> 
+              <p>20 Years experience in Training & Development.Founder of realJavaOnline.com,loves coding in Java(J2SE, J2EE), C++,PHP, Python, AngularJS, Android,MERN Stack.
+                </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+  </center>
+    
+
+  </div>
+
+
+  <!-- ________________________________________REACHUS__________________________________________________ -->
+
+  <div class="container-fluid bg-black mt-5   bg-gradient " data-aos="fade-down" id="reach">
+    <h1 class=" container display-5 text-light"> LET'S</h1>
+    <h1 class=" container display-4 purple">MEET </h1>
+
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.175134961476!2d76.65758911520027!3d30.51608648171315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fc32344a6e2d7%3A0x81b346dee91799ca!2sChitkara%20University!5e0!3m2!1sen!2sin!4v1661531934240!5m2!1sen!2sin"
+      width=100% height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  </div>
+
+  <!-- ________________________________________CONTACT______________________________________________________________ -->
+
+  <div class="container-fluid text-center bg-black mt-5 mb-5  bg-gradient  " data-aos="fade-down">
+
+
+    <div class="row mb-5">
+      <div class="col mt-5">
+        <h1 class=" container display-4 text-light">GET IN TOUCH</h1>
+        <h1 class=" container display-6 purple">CONTACT ME</h1>
+      </div>
+      <div class=" col ">
+
+        <div class=" container  input-group mb-4 mt-5   ">
+          <span class="input-group-text bg-purple" id="basic-addon1">@</span>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+
+        <div class=" container input-group mb-4">
+          <input type="text" class="form-control " placeholder="Recipient's username" aria-label="Recipient's username"
+            aria-describedby="basic-addon2">
+          <span class="input-group-text bg-purple" id="basic-addon2">@example.com</span>
+        </div>
+
+        <div class=" container input-group mb-4 ">
+          <span class="input-group-text bg-purple">Message</span>
+          <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-outline-light border border-light mt-3 mb-5 rounded-pill ">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <a href="#home">
+    <span class="sticky-bottom">
+      <i class="fa-solid fa-circle-arrow-up fa-3x  text-light "></i>
+    </span>
+  </a>
+
+
+
+  <!-- _____________________________________FOOTER___________________________________ -->
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#BB86FC" fill-opacity="1"
+      d="M0,256L0,224L288,224L288,64L576,64L576,256L864,256L864,160L1152,160L1152,32L1440,32L1440,320L1152,320L1152,320L864,320L864,320L576,320L576,320L288,320L288,320L0,320L0,320Z">
+    </path>
+  </svg>
+  <div style="background-color:#BB86FC;">
+    <center>
+      <h3>
+        <i> satyam1086@chitkara.edu.in</i>
+      </h3>
+      <div>
+        <i class="fa-brands  fa-2x fa-twitter ms-3 mt-3"></i>
+        <i class="fa-brands  fa-2x fa-linkedin ms-3"></i>
+        <i class="fa-brands  fa-2x fa-github ms-3 mb-5"></i>
+
+      </div>
+    </center>
+  </div>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 1500,
+    });
+  </script>
+
+
+</body>
+
+</html>

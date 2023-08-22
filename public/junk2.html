@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHarks</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <link rel="icon" href="pics/fav1.png">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="js/jquery-1.8.2.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      // LOGIN ENTRY WITH RESPECTIVE PAGE LINKING.....................
+
+      $("#btnlogin").click(function () {
+        var email = $("#txtel").val();
+        var password = $("#txtpl").val();
+
+        var url = "/ajaxlogin?emailid=" + email + "&pwd=" + password;
+
+        $.getJSON(url, function (respJson) 
+        {
+          alert(JSON.stringify(respJson));
+          if (respJson.length==1)
+           {
+                if (respJson[0].type== "invester") {
+                 alert(respJson[0].type);
+                 location.href = "dash_invester.html";
+            }
+            else {
+              location.href = "dash_pitcher.html";
+            }
+          }
+
+          else
+            alert("Invalid uid/password");
+        })
+      });
+
+
+// LOGINBUTTON ........................
+      var i = 0;
+      $("#btnsignup").click(function () {
+
+        var email = $("#txtes").val();
+        var password = $("#txtps").val();
+        var type = $("#txttype").val();
+        var url = "/ajaxemail?emailid=" + email + "&pwd=" + password + "&type=" + type;
+
+        $.get(url, function (resp) {
+          alert(resp);
+        })
+      });
+    });
+  </script>
+</head>
+
+<body style="background-color:aliceblue ;">
+
+  <nav class="navbar bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="pics/animals.png" alt="">
+
+      </a>
+    </div>
+  
+ 
+
+    <nav class="navbar bg-dark">
+      <form class="container-fluid justify-content-start">
+        <button class="btn btn-outline-info me-2" type="button" data-bs-toggle="modal"
+          data-bs-target="#signupModal">Sign-up</button>
+        <button class="btn btn-m btn-outline-info" type="button" data-bs-toggle="modal"
+          data-bs-target="#loginModal">Login</button>
+      </form>
+    </nav>
+
+  </nav>
+
+
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/public/pics/crousel1 (1).jpg" class="d-block w-100" alt="..." height="500" width="500">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/public/pics/crousel2 (1).jpg" class="d-block w-100" alt="..."height="500" width="500">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/public/pics/crousel3 (1).jpg" class="d-block w-100" alt="..."height="500" width="500">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+    
+
+
+    <!-- SIGNUPMODAL-------------------- -->
+
+    <div class="modal" tabindex="-1" id="signupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">SIGN-UP with us </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtes" name="txtes" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" id="txtps" name="txtps">
+            </div>
+            <div class="mb-3">
+              <select class="form-select" aria-label="Default select example" id="txttype">
+                <option> Select menu</option>
+                <option value="pitcher">Pitcher</option>
+                <option value="invester">Invester</option>
+
+              </select>
+            </div>
+            <center>
+              <button type="button" class="btn btn-primary" id="btnsignup" >Signup</button>
+            </center>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- LOGINMODAL-------------------- -->
+
+    <div class="modal" tabindex="-1" id="loginModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">LOG-IN now</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtel" name="txtel" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" id="txtpl" name="txtpl">
+            </div>
+            <center>
+              <button type="button" class="btn btn-primary" id="btnlogin">Login</button>
+            </center>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
